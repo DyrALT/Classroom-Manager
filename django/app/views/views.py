@@ -7,4 +7,4 @@ from rest_framework import authentication, permissions
 class IndexView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
-        return Response(data={'data': 'selam'})
+        return Response(data={'status':'ok','data': 'selam','description':None})
