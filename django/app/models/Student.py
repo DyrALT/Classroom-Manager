@@ -6,4 +6,4 @@ class Student(models.Model):
     teacher = models.ForeignKey(Teacher,on_delete=models.CASCADE,related_name='students')
 
     def __str__(self):
-        return self.name
+        return self.user.username

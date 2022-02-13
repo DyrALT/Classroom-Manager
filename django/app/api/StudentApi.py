@@ -1,15 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..Texts import ErrorText
-from ..serializers.teacherSerializer import StudentSerializer
+from ..serializers.studentSerializer import StudentSerializer
 from ..models.Teacher import Teacher
-from ..services.createTeacherService import createTeacherService
+from ..models.Student import Student
+from ..services.createStudentService import createStudentService
 from rest_framework import status
 
-
-class CreateTeacher(APIView):
-    def post(self,request):
-        data = createTeacherService(request)
+class CreateStudent(APIView):
+    def post(self, request):
+        data = createStudentService(request)
         if data is not None:
             serializer = StudentSerializer(data)
             return Response(data={
@@ -23,10 +23,3 @@ class CreateTeacher(APIView):
                 'data': None,
                 'description': ErrorText.key_error.value
             })
-
-
-class ListTeacher(APIView):
-    def get(self,request):
-        query = Teacher.objects.all()
-        serializer = StudentSerializer(query,many=True)
-        return Response(data=serializer.data)
