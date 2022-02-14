@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ..Texts import ErrorText
+from ..Texts import Text
 from ..serializers.teacherSerializer import StudentSerializer
 from ..models.Teacher import Teacher
 from ..services.createTeacherService import createTeacherService
@@ -21,7 +21,7 @@ class CreateTeacher(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST,data={
                 'status':'error',
                 'data': None,
-                'description': ErrorText.key_error.value
+                'description': Text.key_error.value
             })
 
 
