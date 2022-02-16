@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">    
+</head>
+<body>
+<style>
+
+  #card_header_succes {
+    background-color: rgb(12, 167, 12) !important;
+}
+#card_header_warning {
+  background-color: rgb(228, 33, 33) !important;
+}
+#card_header_info {
+  background-color: rgb(82, 243, 241) !important;
+}
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+   {% block style %}
+   {% endblock style %}
+  
+</style>
+    {% include "includes/navbar.html" %}
+    <div class="container">
+      {% comment %} {% if messages %}
+    
+      {% for message in messages %}
+      {% if message.tags == "info" %}
+      <div  class="alert alert-danger">{{ message }}</div>
+      {% else %}
+      <div  class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+      {% endif %}
+      {% endfor %}
+      
+      {% endif %} {% endcomment %}
+
+      {% block body %}
+      {% endblock body %}
+    </div>
+   
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html> 

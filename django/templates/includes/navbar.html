@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a href="/" translate="no" class="navbar-brand">
+        <h2>Classroom Manager</h2>
+      </a>
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% comment %} <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="/" class="nav-item nav-link active">Keşfet</a>
+          <a href="/" class="nav-item nav-link active">Grublar</a>
+        </div> {% endcomment %}
+  
+        <div id="navb" class="navbar-nav ms-auto">
+          {% if request.user.is_authenticated %}
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle"
+              data-bs-toggle="dropdown" aria-expanded="true">
+              <i class="fa fa-user " style="font-size: 20px; color: white"></i> {{request.user.username}}
+            </button>
+            <ul style="right: 0; left: auto;" class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" href="#">Profil</a></li>
+              <li><a class="dropdown-item" href="#">Ayarlar</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/logout">Oturumu kapat</a></li>
+            </ul>
+          </div>
+        </div>
+        {% else %}
+        {% endif %}
+      </div>
+    </div>
+    </div>
+    </div>
+  </nav>
