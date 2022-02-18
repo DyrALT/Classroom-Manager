@@ -1,0 +1,17 @@
+{% extends "includes/base.html" %}
+{% block title%}{{task.title}}{%endblock%}
+{% block style %}
+
+{% endblock style %}
+
+{% block body %}
+
+<h3 class="task-title fw-bold">&#9679;{{task.title}}</h3>
+<p class="task-content fw-light">{{task.content}}</p>
+<hr>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a type="button" href="finish/{{task.id}}" class="btn btn-success">YAPILDI</a>
+    <button type="button" class="btn btn-danger">YAPILMADI</button>
+</div>
+{% endblock body %}

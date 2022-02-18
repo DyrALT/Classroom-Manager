@@ -2,17 +2,19 @@
 {% block title%}Ana Sayfa{%endblock%} 
 {% block body %}
 
-<h2>Finished</h2>
+<h2>Yapilan Gorevler:</h2>
 {% if finished %}
 <div class="row">
 {% for task in finished %}
   <div class="column">
       <div class="card text-center">
-        <div class="card-header" id="card_header_succes">tamamlandi</div>
+        <div class="card-header" id="card_header_succes">Tamamlandi</div>
           <div class="card-body">
               <h5 class="card-title">{{task.title}}</h5>
               <p class="card-text">{{task.content}}</p>
-              <a href="#" class="btn btn-primary">Button</a>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+              <a href="/task/{{task.id}}" class="btn btn-primary">Detay</a></div>
           </div>
       </div>
   </div>
@@ -21,39 +23,23 @@
 {% else %}
 yok
 {% endif %}
-
-<h2>doing</h2>
-{% if doing %}
-<div class="row">
-{% for task in doing %}
-  <div class="column">
-      <div class="card text-center">
-        <div class="card-header" id="card_header_info">tamamlandi</div>
-          <div class="card-body">
-              <h5 class="card-title">{{task.title}}</h5>
-              <p class="card-text">{{task.content}}</p>
-              <a href="#" class="btn btn-primary">Button</a>
-          </div>
-      </div>
-  </div>
-{% endfor %}
-{% else %}
-yok
-{% endif %}
     
-<h2>not doing</h2>
+<h2>Yapilmamis gorevler:</h2>
 {% if not_doing %}
 <div class="row">
 
 {% for task in not_doing %}
   <div class="column">
       <div class="card text-center">
-        <div class="card-header" id="card_header_warning">tamamlanmadi</div>
+        <div class="card-header" id="card_header_warning">Tamamlanmadi</div>
           <div class="card-body">
               <h5 class="card-title">{{task.title}}</h5>
               <p class="card-text">{{task.content}}</p>
-              <a href="#" class="btn btn-primary">Button</a>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+              <a href="/task/{{task.id}}  " class="btn btn-primary">Detay</a>
           </div>
+        </div>
       </div>
   </div>
 {% endfor %}

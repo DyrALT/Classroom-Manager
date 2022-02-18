@@ -5,12 +5,16 @@ from .api.TeacherApi import ListTeacher,CreateTeacher
 from .api.StudentApi import CreateStudent
 from .api.TaskApi import CreateTask, FinishTask,ListTasks
 from .utils.CustomToken import MyTokenObtainPairView
-from .views.index import index
-from .views.login import login
+from .views.index import indexView
+from .views.login import loginView,logoutView
+from .views.task import taskView,finishTaskView
 
 urlpatterns = [
-    path('',index,name='index'),
-    path('login/',login),
+    path('',indexView,name='index'),
+    path('login/',loginView,name='login'),
+    path('logout/',logoutView),
+    path('task/<str:id>',taskView),
+    path('task/finish/<str:id>',finishTaskView),
     path('api/create/teacher/',CreateTeacher.as_view()),
     path('api/create/student/',CreateStudent.as_view()),
     path('api/create/task/',CreateTask.as_view()),

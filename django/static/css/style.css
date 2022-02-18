@@ -1,0 +1,23 @@
+#card_header_succes {
+    background-color: rgb(12, 167, 12) !important;
+}
+#card_header_warning {
+  background-color: rgb(228, 33, 33) !important;
+}
+#card_header_info {
+  background-color: rgb(82, 243, 241) !important;
+}
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  

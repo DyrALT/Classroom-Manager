@@ -5,15 +5,14 @@ from ..models.Student import Student
 from ..models.Teacher import Teacher
 
 @login_required(login_url='/login')
-def index(request):
+def indexView(request):
     try:
         student = request.user.student.get()
         context = {
-        'finished' : student.finished_tasks.all(),
-        'doing' : student.doing_tasks.all(),
-        'not_doing' : student.not_doing_tasks.all(),
+        'finished' : student.finished.all(),
+        'not_doing' : student.not_doing.all(),
         }
     except:
         context={}
-    print(f'context=====> f{context}')
     return render(request,'index.html',context)
+

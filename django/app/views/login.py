@@ -4,7 +4,7 @@ from django.contrib.auth import logout as logout_, login as login_ , authenticat
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-def login(request):
+def loginView(request):
     current_user = User.objects.filter(id=request.user.id).first()
     if current_user is not None:
         return redirect('index')
@@ -19,3 +19,7 @@ def login(request):
         return render(request,"login.html")
     else:
         return render(request,"login.html")
+
+def logoutView(request):
+    logout_(request)
+    return redirect("login")
