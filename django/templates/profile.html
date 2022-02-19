@@ -1,0 +1,25 @@
+{% extends 'includes/base.html' %}
+{% block title%}Profil{%endblock%} 
+{% block body %}
+<div class="col-md-5 border-right border rounded" id="profile-form-border">
+    <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Profil Ayarlari</h4>
+        </div>
+        <form method=post>
+            {% csrf_token %}
+        <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Ad</label><input type="text" class="form-control" name='firstName' placeholder="first name" value="{{request.user.first_name}}"></div>
+            <div class="col-md-6"><label class="labels">Soyad</label><input type="text" class="form-control" name="lastName" value="{{request.user.last_name}}" placeholder="surname"></div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12"><label class="labels">Yeni sifre</label><input type="text" name='password' class="form-control" placeholder="new password" value=""></div>
+            &nbsp;
+            <div class="col-md-12"><label class="labels">Sifreyi dogrula</label>  <input type="text" name='password_confirm' class="form-control" placeholder="confirm password" value=""></div>
+            &nbsp;
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    
+    <button class='btn btn-primary col-md-3'>kaydet</button></div>
+</form>
+</div>
+{% endblock body %}

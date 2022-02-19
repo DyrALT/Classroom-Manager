@@ -29,18 +29,18 @@
 </style>
     {% include "includes/navbar.html" %}
     <div class="container">
-      {% comment %} {% if messages %}
+      {% if messages %}
     
       {% for message in messages %}
       {% if message.tags == "info" %}
-      <div  class="alert alert-danger">{{ message }}</div>
+      <div style='margin-top:10px' class="alert alert-danger">{{ message }}</div>
       {% else %}
-      <div  class="alert alert-{{ message.tags }}">{{ message }}</div>
+      <div style='margin-top:10px' class="alert alert-{{ message.tags }}">{{ message }}</div>
 
       {% endif %}
       {% endfor %}
       
-      {% endif %} {% endcomment %}
+      {% endif %}
 
       {% block body %}
       {% endblock body %}

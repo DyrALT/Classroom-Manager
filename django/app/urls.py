@@ -7,14 +7,17 @@ from .api.TaskApi import CreateTask, FinishTask,ListTasks
 from .utils.CustomToken import MyTokenObtainPairView
 from .views.index import indexView
 from .views.login import loginView,logoutView
-from .views.task import taskView,finishTaskView
-
+from .views.task import taskView,finishTaskView,unFinishedTaskView
+from .views.profile import profileView
 urlpatterns = [
     path('',indexView,name='index'),
     path('login/',loginView,name='login'),
     path('logout/',logoutView),
     path('task/<str:id>',taskView),
     path('task/finish/<str:id>',finishTaskView),
+    path('task/unfinish/<str:id>',unFinishedTaskView),
+    path('profile/',profileView),
+    #api
     path('api/create/teacher/',CreateTeacher.as_view()),
     path('api/create/student/',CreateStudent.as_view()),
     path('api/create/task/',CreateTask.as_view()),

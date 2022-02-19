@@ -10,7 +10,7 @@ def indexView(request):
         student = request.user.student.get()
         context = {
         'finished' : student.finished.all(),
-        'not_doing' : student.not_doing.all(),
+        'unfinished' : student.unfinished.all(),
         }
     except:
         context={}

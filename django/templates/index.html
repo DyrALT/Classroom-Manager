@@ -2,7 +2,7 @@
 {% block title%}Ana Sayfa{%endblock%} 
 {% block body %}
 
-<h2>Yapilan Gorevler:</h2>
+<h2 style='margin-top:10px  '>Yapilan Gorevler:</h2>
 {% if finished %}
 <div class="row">
 {% for task in finished %}
@@ -21,14 +21,15 @@
   
 {% endfor %}
 {% else %}
-yok
+<div class='card-title text-xl-center me-auto w-25 rounded-pill '>tamamlanan gorev yok</div>
+
 {% endif %}
-    
+<hr>
 <h2>Yapilmamis gorevler:</h2>
-{% if not_doing %}
+{% if unfinished %}
 <div class="row">
 
-{% for task in not_doing %}
+{% for task in unfinished %}
   <div class="column">
       <div class="card text-center">
         <div class="card-header" id="card_header_warning">Tamamlanmadi</div>
@@ -44,6 +45,6 @@ yok
   </div>
 {% endfor %}
 {% else %}
-yok
+<div class='card-title text-xl-center me-auto w-25 rounded-pill'>tamamlanmayan gorev yok</div>
 {% endif %}
 {% endblock body %}

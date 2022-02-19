@@ -9,7 +9,7 @@ class Task(models.Model):
     teacher = models.ForeignKey(Teacher,on_delete=models.CASCADE,related_name='tasks')
     status = models.BooleanField(default=True)
     finished = models.ManyToManyField(Student,blank=True,related_name="finished")
-    not_doing = models.ManyToManyField(Student,blank=True,related_name="not_doing")
+    unfinished = models.ManyToManyField(Student,blank=True,related_name="unfinished")
 
     def __str__(self):
         return self.title

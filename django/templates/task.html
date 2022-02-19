@@ -5,13 +5,63 @@
 {% endblock style %}
 
 {% block body %}
-
-<h3 class="task-title fw-bold">&#9679;{{task.title}}</h3>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Emin misiniz ?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Bu gorevi tamamlamak istediginize emin misiniz ogretmeniniz seciminizi gorecektir
+        </div>
+        <div class="modal-footer">
+            <a type="button" href="finish/{{task.id}}" class="btn btn-success">Evet</a> 
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hayir </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Emin misiniz ?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Bu gorevi tamamlamamak istediginize emin misiniz ogretmeniniz seciminizi gorecektir
+        </div>
+        <div class="modal-footer">
+            <a type="button" href="unfinish/{{task.id}}" class="btn btn-success">Evet</a> 
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hayir </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<h3 class="task-title fw-bold">{{task.title}}</h3>
 <p class="task-content fw-light">{{task.content}}</p>
 <hr>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a type="button" href="finish/{{task.id}}" class="btn btn-success">YAPILDI</a>
-    <button type="button" class="btn btn-danger">YAPILMADI</button>
+    {% comment %} <a type="button" href="finish/{{task.id}}" class="btn btn-success">YAPILDI</a> {% endcomment %}
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Yapildi
+  </button>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    Yapilmadi
+  </button>
 </div>
 {% endblock body %}
+
+
+{% comment %} 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+
+{% endcomment %}
