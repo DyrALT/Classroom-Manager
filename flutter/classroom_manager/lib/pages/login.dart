@@ -1,5 +1,5 @@
 import 'package:classroom_manager/pages/home.dart';
-import 'package:classroom_manager/utils/Auth.dart';
+import 'package:classroom_manager/services/Auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -140,48 +140,6 @@ class _LoginState extends State<Login> {
                           },
                         ),
                         const SizedBox(height: 30),
-                        // #login SNS
-                        Row(
-                          children: [Expanded(child: Divider())],
-                        ),
-                        const SizedBox(height: 30),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.blue),
-                                child: const Center(
-                                  child: Text(
-                                    "Facebook",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 30),
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.black),
-                                child: const Center(
-                                  child: Text(
-                                    "Github",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
