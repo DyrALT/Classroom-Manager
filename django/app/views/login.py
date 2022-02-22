@@ -17,7 +17,7 @@ def loginView(request):
             return redirect("index")
         messages.info(request,"Kullanıcı Adı Veya Şifre Hatalı")
         return render(request,"login.html")
-    else:
+    if request.method == 'GET':
         return render(request,"login.html")
 
 def logoutView(request):
