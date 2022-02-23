@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:classroom_manager/pages/home.dart';
 import 'package:classroom_manager/services/Auth.dart';
+import 'package:classroom_manager/static/texts.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -112,33 +115,23 @@ class _LoginState extends State<Login> {
                         const SizedBox(height: 40),
                         // #login
                         InkWell(
-                          child: Container(
-                            height: 50,
-                            margin: const EdgeInsets.symmetric(horizontal: 50),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Color.fromARGB(255, 84, 163, 187)),
-                            child: const Center(
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                            child: Container(
+                              height: 50,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 50),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Color.fromARGB(255, 84, 163, 187)),
+                              child: const Center(
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                          onTap: () async {
-                            var response =
-                                await _auth.login(_email.text, _password.text);
-                            if (response != null) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (context) => Home(),
-                                  ),
-                                  (route) => false);
-                            }
-                          },
-                        ),
+                            onTap: login),
                         const SizedBox(height: 30),
                       ],
                     ),
@@ -150,5 +143,27 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void login() async {
+    var response = await _auth.loginWithUsernamePassword(_email.text, _password.text);
+    if (response == null) {
+      const snackBar = SnackBar(
+        duration: Duration(seconds: 3),
+        content: Text(Texts.login_error),
+        backgroundColor: (Colors.black54),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ),
+          (route) => false);
+    }
+    // print(response['access']);
+    // if (response != null) {
+
+    // }
   }
 }
