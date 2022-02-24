@@ -6,8 +6,18 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class Auth {
   final storage = FlutterSecureStorage();
 
-  verifyToken() async {
+  Future<String?> getToken() async {
     String? token = await storage.read(key: 'access');
+    return token;
+  }
+
+  Future<String?> getRefreshToken() async {
+    String? token = await storage.read(key: 'refresh');
+    return token;
+  }
+
+  verifyToken() async {
+    String? token = await getToken();
     if (token == null) {
       return false;
     } else {
@@ -29,7 +39,7 @@ class Auth {
   }
 
   refreshToken() async {
-    String? refresh = await storage.read(key: 'refresh');
+    String? refresh = await getRefreshToken();
     if (refresh == null) {
       return false;
     } else {
@@ -53,8 +63,8 @@ class Auth {
   }
 
   getLogin() async {
-    String? access = await storage.read(key: 'access');
-    String? refresh = await storage.read(key: 'refresh');
+    String? access = await getToken();
+    String? refresh = await getRefreshToken();
     print('''
   acces : $access
   refresh : $refresh
@@ -64,12 +74,11 @@ class Auth {
       //token hala gecerli giris yapilabilir
       return true;
     } else {
-      var refresh_token_status = await
-          refreshToken(); //refresh token ile yeni token alinacak
+      var refresh_token_status =
+          await refreshToken(); //refresh token ile yeni token alinacak
       if (refresh_token_status == true) {
         return true;
       } else {
-
         return false;
       }
     }
