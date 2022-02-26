@@ -6,6 +6,7 @@ from ..models.Teacher import Teacher
 from ..models.Student import Student
 from ..services.createStudentService import createStudentService
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 class CreateStudent(APIView):
     def post(self, request):
@@ -23,3 +24,18 @@ class CreateStudent(APIView):
                 'data': None,
                 'description': Text.key_error.value
             })
+
+class ListStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        try:
+            query = request.user.teacher.first().students.all()
+        except :
+            return Response(status=status.HTTP_401_UNAUTHORIZED,data={
+                'status':'error',
+                'data': None,
+                'description': None
+            })
+        serializer = StudentSerializer(query,many=True)
+        return Response(status=status.HTTP_200_OK,data=serializer.data)
+        

@@ -40,7 +40,14 @@ class ListTasks(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        query = request.user.teacher.first().tasks.all()
+        try:
+            query = request.user.teacher.first().tasks.all()
+        except :
+            return Response(status=status.HTTP_403_FORBIDDEN, data={
+                'status': 'error',
+                'data': None,
+                'description': None
+            })
         if query is not None:
             serializer = TaskSerializer(query, many=True)
             return Response(data={

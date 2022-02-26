@@ -1,3 +1,5 @@
+import 'package:classroom_manager/pages/addStudentPage.dart';
+import 'package:classroom_manager/pages/addTaskPage.dart';
 import 'package:classroom_manager/widgets/StudentsWidget.dart';
 import 'package:classroom_manager/widgets/TasksWidget.dart';
 import 'package:classroom_manager/widgets/SettingsWidget.dart';
@@ -85,21 +87,30 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   Widget? floatButtons() {
     return _tabController.index == 0
-        ? const FloatingActionButton(
+        ? FloatingActionButton(
             shape: StadiumBorder(),
-            onPressed: null,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AddTaskPage(),
+              ));
+            },
             foregroundColor: Colors.white,
-            child: Icon(
+            child: const Icon(
               Icons.add,
             ))
-        : _tabController.index == 1 ? const FloatingActionButton(
-            shape: StadiumBorder(),
-            onPressed: null,
-            foregroundColor: Colors.white,
-            child: Icon(
-              Icons.group_add,
-            ),
-          ): null;
-          
+        : _tabController.index == 1
+            ? FloatingActionButton(
+                shape: StadiumBorder(),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AddStudentPage(),
+                  ));
+                },
+                foregroundColor: Colors.white,
+                child: const Icon(
+                  Icons.group_add,
+                ),
+              )
+            : null;
   }
 }
