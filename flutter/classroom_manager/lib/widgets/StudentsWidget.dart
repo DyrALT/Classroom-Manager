@@ -32,10 +32,13 @@ class _StudentsWidgetState extends State<StudentsWidget> {
       children: [
         RefreshIndicator(
             onRefresh: init,
-            child: ListView.builder(
+            child: ListView.separated(
               scrollDirection: Axis.vertical,
+              separatorBuilder: (context, index) => const Divider(
+                color: Colors.black,
+              ),
               shrinkWrap: true,
-              itemCount: students?.length,
+              itemCount: students!.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(students?[index].username ?? 'null'),

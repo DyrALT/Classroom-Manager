@@ -29,29 +29,30 @@ class _TasksWidgetState extends State<TasksWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RefreshIndicator(
-            onRefresh: init,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: tasks?.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                    title: Text(tasks?[index].title ?? 'null'),
-                    subtitle: Text(tasks?[index].content ?? 'null'),
-                    trailing: Text(
+    return RefreshIndicator(
+        onRefresh: init,
+        child: ListView.separated(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          separatorBuilder: (context, index) => const Divider(
+            color: Colors.black,
+          ),
+          itemCount: tasks!.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+                title: Text(tasks?[index].title ?? 'null'),
+                subtitle: Text(tasks?[index].content ?? 'null',
+                    overflow: TextOverflow.ellipsis),
+                trailing: Text(
+                    DateTime.parse(tasks?[index].createdDate ?? 'null')
+                            .hour
+                            .toString() +
+                        ":" +
                         DateTime.parse(tasks?[index].createdDate ?? 'null')
-                                .hour
-                                .toString() +
-                            ":" +
-                            DateTime.parse(tasks?[index].createdDate ?? 'null')
-                                .minute
-                                .toString()));
-              },
-            ))
-      ],
-    );
+                            .minute
+                            .toString()
+                            .padLeft(2, "0")));
+          },
+        ));
   }
 }

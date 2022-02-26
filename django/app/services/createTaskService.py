@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 from ..models.Task import Task
 
 def createTaskService(request):
-    data = request.data
-    teacher = request.user.teacher.first()
     try:
+        data = request.data
+        teacher = request.user.teacher.first()
         task = Task(
             title=data['title'],
             content=data['content'],

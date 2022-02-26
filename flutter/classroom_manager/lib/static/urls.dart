@@ -1,8 +1,10 @@
 class Urls {
-  static const mainUrl = "192.168.5.163:8080";
+  static const mainUrl = "192.168.5.169:8080";
   static const tokenUrl = '/api/token/';
   static const verifyToken = '/api/token/verify/';
   static const resfreshToken = '/api/token/refresh/';
   static const listTask = '/api/list/task/';
   static const listStudent = '/api/list/student/';
+  static const createTask = '/api/create/task/';
+  static const createStudent = '/api/create/student/';
 }

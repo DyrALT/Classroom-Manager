@@ -9,12 +9,8 @@ class StudentService {
 
   getStudents() async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization':
-          'Bearer $token'
-    };
-    var request = http.Request(
-        'GET', Uri.http(Urls.mainUrl,Urls.listStudent));
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.Request('GET', Uri.http(Urls.mainUrl, Urls.listStudent));
 
     request.headers.addAll(headers);
 
@@ -23,11 +19,32 @@ class StudentService {
     if (response.statusCode == 200) {
       var obj = json.decode(await response.stream.bytesToString());
       List<Student> students = [];
-      students
-          .addAll((obj as List).map((e) => Student.fromJson(e)).toList());
+      students.addAll((obj as List).map((e) => Student.fromJson(e)).toList());
       return students;
     } else {
       print(response.reasonPhrase);
+    }
+  }
+
+  createStudent(String firstName, String lastName, String password) async {
+    String? token = await _auth.getToken();
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request =
+        http.Request('POST', Uri.http(Urls.mainUrl, Urls.createStudent));
+    request.body = json.encode(
+        {"firstName": firstName, "lastName": lastName, "password": password});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
     }
   }
 }

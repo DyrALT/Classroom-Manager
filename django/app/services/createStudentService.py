@@ -5,7 +5,7 @@ def createStudentService(request):
     data = request.data
     try:
         user = User(username=f'{data["firstName"]} {data["lastName"]}',first_name=data["firstName"],last_name=data["lastName"],password=data["password"])
-        teacher_id = data['teacher_id']
+        teacher_id = request.user.teacher.first().id
     except KeyError:
         return None
     user.save()
