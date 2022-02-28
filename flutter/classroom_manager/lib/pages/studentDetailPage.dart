@@ -1,15 +1,17 @@
+import 'package:classroom_manager/models/Student.dart';
 import 'package:classroom_manager/services/StudentService.dart';
 import 'package:classroom_manager/static/texts.dart';
 import 'package:flutter/material.dart';
 
-class AddStudentPage extends StatefulWidget {
-  const AddStudentPage({Key? key}) : super(key: key);
+class StudentDetailPage extends StatefulWidget {
+  late Student student;
+  StudentDetailPage({Key? key, required this.student}) : super(key: key);
 
   @override
-  _AddStudentPageState createState() => _AddStudentPageState();
+  _StudentDetailPageState createState() => _StudentDetailPageState();
 }
 
-class _AddStudentPageState extends State<AddStudentPage> {
+class _StudentDetailPageState extends State<StudentDetailPage> {
   var formKey = GlobalKey<FormState>();
   StudentService _studentService = StudentService();
   late String _firstName;
@@ -25,8 +27,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
-        title: const Text(
-          'Add Student',
+        title: Text(
+          widget.student.username!,
           style: TextStyle(
             color: Colors.white,
           ),
@@ -57,6 +59,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         onSaved: (value) {
                           _firstName = value!;
                         },
+                        controller: TextEditingController(
+                            text: widget.student.firstName),
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.replaceAll(' ', '') == '') {
@@ -81,6 +85,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
                           _lastName = value!;
                         },
                         keyboardType: TextInputType.text,
+                        controller: TextEditingController(
+                            text: widget.student.lastName),
                         validator: (value) {
                           if (value!.replaceAll(' ', '') == '') {
                             return Texts.required_to_be_filled;
@@ -109,8 +115,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   obscureText: true,
                   keyboardType: TextInputType.text,
                   validator: (value) {
-                    if (value!.replaceAll(' ', '') == '') {
-                      return Texts.required_to_be_filled;
+                    if (value!.length < 6 && value.length > 0) {
+                      return Texts.required_to_six_character;
                     } else {
                       return null;
                     }
@@ -133,21 +139,24 @@ class _AddStudentPageState extends State<AddStudentPage> {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  var student = await _studentService.createStudent(
-                      _firstName, _lastName, _password);
-                  if (student) {
+                  var data = await _studentService.updateStudent(
+                      widget.student.id.toString(),
+                      _firstName,
+                      _lastName,
+                      _password);
+                  if (data) {
                     Navigator.of(context).pop();
                   } else {
                     const snackBar = SnackBar(
                       duration: Duration(seconds: 3),
-                      content: Text(Texts.student_create_error),
+                      content: Text(Texts.student_update_error),
                       backgroundColor: (Colors.black54),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                 }
               },
-              child: Text('Olustur'))
+              child: Text('Guncelle'))
         ],
       ),
     );

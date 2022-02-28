@@ -70,13 +70,13 @@ class Auth {
   refresh : $refresh
 ''');
     var token_status = await verifyToken();
-    if (token_status == true) {
+    if (token_status) {
       //token hala gecerli giris yapilabilir
       return true;
     } else {
       var refresh_token_status =
           await refreshToken(); //refresh token ile yeni token alinacak
-      if (refresh_token_status == true) {
+      if (refresh_token_status ) {
         return true;
       } else {
         return false;
@@ -84,7 +84,20 @@ class Auth {
     }
   }
 
-  loginWithToken() async {}
+  verifyAuth() async {
+    var verify_token = await verifyToken();
+    if (verify_token == false) {
+      var refresh_token = await refreshToken();
+      if (refresh_token == false) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
   loginWithUsernamePassword(String username, String password) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.tokenUrl));

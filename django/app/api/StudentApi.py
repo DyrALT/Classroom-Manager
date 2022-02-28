@@ -1,5 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from ..services.updateStudentService import updateStudentService
 from ..Texts import Text
 from ..serializers.studentSerializer import StudentSerializer
 from ..models.Teacher import Teacher
@@ -39,3 +41,17 @@ class ListStudentView(APIView):
         serializer = StudentSerializer(query,many=True)
         return Response(status=status.HTTP_200_OK,data=serializer.data)
         
+
+class UpdateStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        data = updateStudentService(request)
+        if data:
+            return Response(status=status.HTTP_200_OK,data={
+                'data': None,
+            })
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST,data={
+                'data': None,
+            })

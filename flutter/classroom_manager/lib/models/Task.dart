@@ -1,18 +1,18 @@
+import 'package:classroom_manager/models/Student.dart';
+
 class Task {
   int? id;
   String? title;
   String? content;
   String? createdDate;
-  int? teacher;
-  List<int>? finished;
-  List<int>? unfinished;
+  List<Student>? finished;
+  List<Student>? unfinished;
 
   Task(
       {this.id,
       this.title,
       this.content,
       this.createdDate,
-      this.teacher,
       this.finished,
       this.unfinished});
 
@@ -21,9 +21,18 @@ class Task {
     title = json['title'];
     content = json['content'];
     createdDate = json['created_date'];
-    teacher = json['teacher'];
-    finished = json['finished'].cast<int>();
-    unfinished = json['unfinished'].cast<int>();
+    if (json['finished'] != null) {
+      finished = <Student>[];
+      json['finished'].forEach((v) {
+        finished!.add(new Student.fromJson(v));
+      });
+    }
+    if (json['unfinished'] != null) {
+      unfinished = <Student>[];
+      json['unfinished'].forEach((v) {
+        unfinished!.add(new Student.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -32,9 +41,12 @@ class Task {
     data['title'] = this.title;
     data['content'] = this.content;
     data['created_date'] = this.createdDate;
-    data['teacher'] = this.teacher;
-    data['finished'] = this.finished;
-    data['unfinished'] = this.unfinished;
+    if (this.finished != null) {
+      data['finished'] = this.finished!.map((v) => v.toJson()).toList();
+    }
+    if (this.unfinished != null) {
+      data['unfinished'] = this.unfinished!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

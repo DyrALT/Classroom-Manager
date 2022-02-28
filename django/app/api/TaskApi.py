@@ -1,5 +1,8 @@
+from re import M
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from ..models.Task import Task
 from ..serializers.taskSerializer import TaskSerializer
 from ..services.createTaskService import createTaskService
 from ..services.finishTaskService import finishTaskService
@@ -42,7 +45,7 @@ class ListTasks(APIView):
     def get(self, request):
         try:
             query = request.user.teacher.first().tasks.all()
-        except :
+        except:
             return Response(status=status.HTTP_403_FORBIDDEN, data={
                 'status': 'error',
                 'data': None,
@@ -51,7 +54,7 @@ class ListTasks(APIView):
         if query is not None:
             serializer = TaskSerializer(query, many=True)
             return Response(data={
-                'tasks':serializer.data
+                'tasks': serializer.data
             })
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
@@ -77,4 +80,25 @@ class FinishTask(APIView):
                 'status': 'error',
                 'data': None,
                 'description': Text.delete_task_error.value
+            })
+
+
+class DetailTask(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        query = Task.objects.filter(id=request.data['id'])
+        serializer = TaskSerializer(query,many=True)
+        
+        if serializer is not None:
+            return Response(data=
+
+                serializer.data[0],
+
+            )
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={
+                'status': 'error',
+                'data': None,
+                'description': Text.key_error.value
             })

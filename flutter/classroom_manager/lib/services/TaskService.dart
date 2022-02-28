@@ -25,11 +25,42 @@ class TaskService {
       return tasks;
     } else {
       print(response.reasonPhrase);
-      return null;
+      var auth = await _auth.verifyAuth();
+      if (auth) {
+        return null;
+      } else {
+        return false;
+      }
     }
   }
 
-  Future<bool>createTask(String title, String content) async {
+  refreshTask(int id) async {
+    String? token = await _auth.getToken();
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.detailTask));
+    request.body = json.encode({"id": id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(await response.stream.bytesToString());
+      return Task.fromJson(jsonResponse);
+    } else {
+      print(response.reasonPhrase);
+      var auth = await _auth.verifyAuth();
+      if (auth) {
+        return null;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  createTask(String title, String content) async {
     String? token = await _auth.getToken();
     var headers = {
       'Authorization': 'Bearer $token',
@@ -45,7 +76,12 @@ class TaskService {
       return true;
     } else {
       print(response.reasonPhrase);
-      return false;
+      var auth = await _auth.verifyAuth();
+      if (auth) {
+        return null;
+      } else {
+        return false;
+      }
     }
   }
 }
