@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from ..services.deleteStudentService import deleteStudentService
+
 from ..services.updateStudentService import updateStudentService
 from ..Texts import Text
 from ..serializers.studentSerializer import StudentSerializer
@@ -10,7 +12,7 @@ from ..services.createStudentService import createStudentService
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
-class CreateStudent(APIView):
+class CreateStudentView(APIView):
     def post(self, request):
         data = createStudentService(request)
         if data is not None:
@@ -25,6 +27,17 @@ class CreateStudent(APIView):
                 'status':'error',
                 'data': None,
                 'description': Text.key_error.value
+            })
+
+class DeleteStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        data = deleteStudentService(request)
+        if data:
+            return Response(status=status.HTTP_200_OK,data={"data":None})
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST,data={
+                'data': None,
             })
 
 class ListStudentView(APIView):

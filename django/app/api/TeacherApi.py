@@ -7,7 +7,7 @@ from ..services.createTeacherService import createTeacherService
 from rest_framework import status
 
 
-class CreateTeacher(APIView):
+class CreateTeacherView(APIView):
     def post(self,request):
         data = createTeacherService(request)
         if data is not None:

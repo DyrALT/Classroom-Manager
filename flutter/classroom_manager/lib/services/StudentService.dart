@@ -81,4 +81,25 @@ class StudentService {
       return false;
     }
   }
+
+  deleteStudent(String student_id) async {
+    String? token = await _auth.getToken();
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request =
+        http.Request('POST', Uri.http(Urls.mainUrl, Urls.deleteStudent));
+    request.body = json.encode({"student_id": student_id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
 }

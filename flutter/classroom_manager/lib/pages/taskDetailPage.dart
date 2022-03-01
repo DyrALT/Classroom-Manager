@@ -1,6 +1,7 @@
 import 'package:classroom_manager/models/Task.dart';
 import 'package:classroom_manager/pages/login.dart';
 import 'package:classroom_manager/services/TaskService.dart';
+import 'package:classroom_manager/static/texts.dart';
 import 'package:classroom_manager/widgets/TasksWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -57,6 +58,11 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
             color: Colors.white,
           ),
         ),
+        actions: [
+          Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+              child: IconButton(onPressed: delete, icon: Icon(Icons.delete)))
+        ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
@@ -147,5 +153,34 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         task = gelenTask;
       });
     } else {}
+  }
+
+  delete() {
+    return showDialog(
+      context: context,
+      builder: (builder) => AlertDialog(
+        title: Text("Silmek İstediğinize Emin Misiniz"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              var status = await _taskService.deleteTask(task.id.toString());
+              if (status) {
+                Navigator.of(context, rootNavigator: true).pop(context);
+                Navigator.of(context).pop();
+              } else {
+                Navigator.of(context, rootNavigator: true).pop(context);
+                const snackBar = SnackBar(
+                  duration: Duration(seconds: 3),
+                  content: Text(Texts.task_delete_error),
+                  backgroundColor: (Colors.black54),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
+            child: Text("EVET"),
+          ),
+        ],
+      ),
+    );
   }
 }

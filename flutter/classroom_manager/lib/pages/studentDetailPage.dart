@@ -24,6 +24,11 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
+        actions: [
+          Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+              child: IconButton(onPressed: delete, icon: Icon(Icons.delete)))
+        ],
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -157,6 +162,36 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                 }
               },
               child: Text('Guncelle'))
+        ],
+      ),
+    );
+  }
+
+  delete() {
+    return showDialog(
+      context: context,
+      builder: (builder) => AlertDialog(
+        title: Text("Silmek İstediğinize Emin Misiniz"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              var status = await _studentService
+                  .deleteStudent(widget.student.id.toString());
+              if (status) {
+                Navigator.of(context, rootNavigator: true).pop(context);
+                Navigator.of(context).pop();
+              } else {
+                Navigator.of(context, rootNavigator: true).pop(context);
+                const snackBar = SnackBar(
+                  duration: Duration(seconds: 3),
+                  content: Text(Texts.student_delete_error),
+                  backgroundColor: (Colors.black54),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
+            child: Text("EVET"),
+          ),
         ],
       ),
     );

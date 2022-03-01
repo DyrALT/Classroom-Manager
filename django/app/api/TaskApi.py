@@ -13,7 +13,7 @@ from ..models.Teacher import Teacher
 from ..models.Student import Student
 
 
-class CreateTask(APIView):
+class CreateTaskView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -39,7 +39,7 @@ class CreateTask(APIView):
             })
 
 
-class ListTasks(APIView):
+class ListTasksView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -64,16 +64,14 @@ class ListTasks(APIView):
             })
 
 
-class FinishTask(APIView):
+class FinishTaskView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         data = finishTaskService(request)
         if data:
             return Response(data={
-                'status': 'ok',
                 'data': None,
-                'description': Text.delete_task_success.value
             })
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
@@ -83,7 +81,7 @@ class FinishTask(APIView):
             })
 
 
-class DetailTask(APIView):
+class DetailTaskView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

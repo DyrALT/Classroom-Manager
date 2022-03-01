@@ -84,4 +84,25 @@ class TaskService {
       }
     }
   }
+
+  deleteTask(String task_id) async {
+    String? token = await _auth.getToken();
+    var headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.deleteTask));
+    request.body = json.encode({"task_id": task_id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+
+    }
+  }
 }

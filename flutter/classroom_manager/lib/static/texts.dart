@@ -10,5 +10,6 @@ class Texts {
   static const student_form_password_title = 'Password';
   static const student_create_error = 'Ogrenci Olusturulamadi';
   static const student_update_error = 'Ogrenci Guncellenemedi';
-
+  static const task_delete_error = 'Task Silinemedi';
+  static const student_delete_error = 'Ogrenci Silinemedi';
 }
