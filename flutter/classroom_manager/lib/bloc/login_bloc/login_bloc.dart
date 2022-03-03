@@ -1,7 +1,9 @@
 import 'dart:async';
-import 'package:classroom_manager/pages/home.dart';
-import 'package:classroom_manager/pages/login.dart';
+
 import "package:flutter/material.dart";
+
+import '../../pages/home.dart';
+import '../../pages/login.dart';
 import 'login_events.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 

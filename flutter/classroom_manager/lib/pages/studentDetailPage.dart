@@ -1,7 +1,8 @@
-import 'package:classroom_manager/models/Student.dart';
-import 'package:classroom_manager/services/StudentService.dart';
-import 'package:classroom_manager/static/texts.dart';
 import 'package:flutter/material.dart';
+
+import '../models/Student.dart';
+import '../services/StudentService.dart';
+import '../static/texts.dart';
 
 class StudentDetailPage extends StatefulWidget {
   late Student student;
@@ -24,11 +25,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
-        actions: [
-          Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
-              child: IconButton(onPressed: delete, icon: Icon(Icons.delete)))
-        ],
+        actions: [Padding(padding: EdgeInsets.fromLTRB(0, 0, 15, 0), child: IconButton(onPressed: delete, icon: Icon(Icons.delete)))],
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -64,8 +61,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                         onSaved: (value) {
                           _firstName = value!;
                         },
-                        controller: TextEditingController(
-                            text: widget.student.firstName),
+                        controller: TextEditingController(text: widget.student.firstName),
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.replaceAll(' ', '') == '') {
@@ -77,10 +73,8 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                         decoration: InputDecoration(
                             errorStyle: TextStyle(fontSize: 15),
                             labelText: Texts.student_form_firstname_title,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.purple))),
+                            border:
+                                OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(width: 1, color: Colors.purple))),
                       ),
                     ),
                     SizedBox(width: 10),
@@ -90,8 +84,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                           _lastName = value!;
                         },
                         keyboardType: TextInputType.text,
-                        controller: TextEditingController(
-                            text: widget.student.lastName),
+                        controller: TextEditingController(text: widget.student.lastName),
                         validator: (value) {
                           if (value!.replaceAll(' ', '') == '') {
                             return Texts.required_to_be_filled;
@@ -102,10 +95,8 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                         decoration: InputDecoration(
                             errorStyle: TextStyle(fontSize: 15),
                             labelText: Texts.student_form_lastname_title,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: BorderSide(
-                                    width: 1, color: Colors.purple))),
+                            border:
+                                OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(width: 1, color: Colors.purple))),
                       ),
                     ),
                   ],
@@ -129,10 +120,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                   decoration: InputDecoration(
                       errorStyle: TextStyle(fontSize: 15),
                       labelText: Texts.student_form_password_title,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              BorderSide(width: 1, color: Colors.purple))),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(width: 1, color: Colors.purple))),
                 ),
               ),
             ]),
@@ -144,11 +132,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  var data = await _studentService.updateStudent(
-                      widget.student.id.toString(),
-                      _firstName,
-                      _lastName,
-                      _password);
+                  var data = await _studentService.updateStudent(widget.student.id.toString(), _firstName, _lastName, _password);
                   if (data) {
                     Navigator.of(context).pop();
                   } else {
@@ -175,8 +159,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
         actions: <Widget>[
           TextButton(
             onPressed: () async {
-              var status = await _studentService
-                  .deleteStudent(widget.student.id.toString());
+              var status = await _studentService.deleteStudent(widget.student.id.toString());
               if (status) {
                 Navigator.of(context, rootNavigator: true).pop(context);
                 Navigator.of(context).pop();

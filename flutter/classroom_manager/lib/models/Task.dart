@@ -1,4 +1,4 @@
-import 'package:classroom_manager/models/Student.dart';
+import 'Student.dart';
 
 class Task {
   int? id;

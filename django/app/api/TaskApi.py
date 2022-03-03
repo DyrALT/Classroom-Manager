@@ -86,6 +86,13 @@ class DetailTaskView(APIView):
 
     def post(self, request):
         query = Task.objects.filter(id=request.data['id'])
+        try:
+            check = query[0]
+        except :
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={
+                'data': None,
+            })
+            
         serializer = TaskSerializer(query,many=True)
         
         if serializer is not None:

@@ -1,9 +1,8 @@
-import 'dart:convert';
-
-import 'package:classroom_manager/pages/home.dart';
-import 'package:classroom_manager/services/Auth.dart';
-import 'package:classroom_manager/static/texts.dart';
 import 'package:flutter/material.dart';
+
+import '../services/Auth.dart';
+import '../static/texts.dart';
+import 'home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -53,9 +52,7 @@ class _LoginState extends State<Login> {
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60)),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60)),
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -71,10 +68,7 @@ class _LoginState extends State<Login> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromRGBO(171, 171, 171, .7),
-                                  blurRadius: 20,
-                                  offset: Offset(0, 10)),
+                              BoxShadow(color: Color.fromRGBO(171, 171, 171, .7), blurRadius: 20, offset: Offset(0, 10)),
                             ],
                           ),
                           child: Column(
@@ -82,31 +76,22 @@ class _LoginState extends State<Login> {
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.grey.shade200)),
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
                                 ),
                                 child: TextField(
                                   controller: _email,
-                                  decoration: InputDecoration(
-                                      hintText: "Email",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none),
+                                  decoration: InputDecoration(hintText: "Email", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
                                 ),
                               ),
                               Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.grey.shade200)),
+                                  border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
                                 ),
                                 child: TextField(
                                   controller: _password,
-                                  decoration: InputDecoration(
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none),
+                                  decoration:
+                                      InputDecoration(hintText: "Password", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
                                 ),
                               ),
                             ],
@@ -117,17 +102,12 @@ class _LoginState extends State<Login> {
                         InkWell(
                             child: Container(
                               height: 50,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Color.fromARGB(255, 84, 163, 187)),
+                              margin: const EdgeInsets.symmetric(horizontal: 50),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color.fromARGB(255, 84, 163, 187)),
                               child: const Center(
                                 child: Text(
                                   "Login",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),

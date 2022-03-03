@@ -1,8 +1,10 @@
-import 'package:classroom_manager/models/Student.dart';
-import 'package:classroom_manager/services/Auth.dart';
-import 'package:classroom_manager/static/urls.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../models/Student.dart';
+import '../static/urls.dart';
+import 'Auth.dart';
 
 class StudentService {
   Auth _auth = Auth();
@@ -34,14 +36,9 @@ class StudentService {
 
   createStudent(String firstName, String lastName, String password) async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
-    var request =
-        http.Request('POST', Uri.http(Urls.mainUrl, Urls.createStudent));
-    request.body = json.encode(
-        {"firstName": firstName, "lastName": lastName, "password": password});
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.createStudent));
+    request.body = json.encode({"firstName": firstName, "lastName": lastName, "password": password});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -54,16 +51,11 @@ class StudentService {
     }
   }
 
-  updateStudent(String student_id, String firstName, String lastName,
-      String password) async {
+  updateStudent(String student_id, String firstName, String lastName, String password) async {
     String? token = await _auth.getToken();
 
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
-    var request =
-        http.Request('POST', Uri.http(Urls.mainUrl, Urls.updateStudent));
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.updateStudent));
     request.body = json.encode({
       "student_id": student_id,
       "firstName": firstName,
@@ -84,12 +76,8 @@ class StudentService {
 
   deleteStudent(String student_id) async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
-    var request =
-        http.Request('POST', Uri.http(Urls.mainUrl, Urls.deleteStudent));
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.deleteStudent));
     request.body = json.encode({"student_id": student_id});
     request.headers.addAll(headers);
 

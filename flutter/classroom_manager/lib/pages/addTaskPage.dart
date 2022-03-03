@@ -1,6 +1,7 @@
-import 'package:classroom_manager/services/TaskService.dart';
-import 'package:classroom_manager/static/texts.dart';
 import 'package:flutter/material.dart';
+
+import '../services/TaskService.dart';
+import '../static/texts.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -65,10 +66,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       decoration: InputDecoration(
                           errorStyle: TextStyle(fontSize: 15),
                           labelText: Texts.task_form_title,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.purple))),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(width: 1, color: Colors.purple))),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -86,10 +84,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       decoration: InputDecoration(
                           errorStyle: TextStyle(fontSize: 15),
                           labelText: Texts.task_form_content,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.purple))),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(width: 1, color: Colors.purple))),
                     ),
                     const SizedBox(
                       height: 20,
@@ -98,8 +93,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
-                            bool taskStatus =
-                                await _taskService.createTask(_title, _content);
+                            bool taskStatus = await _taskService.createTask(_title, _content);
                             if (taskStatus) {
                               Navigator.of(context).pop();
                             } else {
@@ -108,8 +102,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                                 content: Text(Texts.task_create_error),
                                 backgroundColor: (Colors.black54),
                               );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             }
                           }
                         },

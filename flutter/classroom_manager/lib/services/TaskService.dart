@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:classroom_manager/models/Task.dart';
-import 'package:classroom_manager/services/Auth.dart';
-import 'package:classroom_manager/static/urls.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../models/Task.dart';
+import '../static/urls.dart';
+import 'Auth.dart';
 
 class TaskService {
   Auth _auth = Auth();
@@ -20,8 +20,7 @@ class TaskService {
     if (response.statusCode == 200) {
       List<Task> tasks = [];
       var obj = json.decode(await response.stream.bytesToString());
-      tasks
-          .addAll((obj['tasks'] as List).map((e) => Task.fromJson(e)).toList());
+      tasks.addAll((obj['tasks'] as List).map((e) => Task.fromJson(e)).toList());
       return tasks;
     } else {
       print(response.reasonPhrase);
@@ -36,10 +35,7 @@ class TaskService {
 
   refreshTask(int id) async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.detailTask));
     request.body = json.encode({"id": id});
     request.headers.addAll(headers);
@@ -62,10 +58,7 @@ class TaskService {
 
   createTask(String title, String content) async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.createTask));
     request.body = json.encode({"title": title, "content": content});
     request.headers.addAll(headers);
@@ -87,10 +80,7 @@ class TaskService {
 
   deleteTask(String task_id) async {
     String? token = await _auth.getToken();
-    var headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json'
-    };
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.deleteTask));
     request.body = json.encode({"task_id": task_id});
     request.headers.addAll(headers);
@@ -102,7 +92,6 @@ class TaskService {
     } else {
       print(response.reasonPhrase);
       return false;
-
     }
   }
 }

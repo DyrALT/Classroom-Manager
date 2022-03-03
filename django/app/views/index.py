@@ -13,6 +13,9 @@ def indexView(request):
         'unfinished' : student.unfinished.all(),
         }
     except:
-        context={}
+        teacher = request.user.teacher.first()
+        context={
+            'tasks' : teacher.tasks.all()
+        }
     return render(request,'index.html',context)
 

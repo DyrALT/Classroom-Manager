@@ -1,10 +1,10 @@
-import 'package:classroom_manager/models/Task.dart';
-import 'package:classroom_manager/pages/login.dart';
-import 'package:classroom_manager/services/TaskService.dart';
-import 'package:classroom_manager/static/texts.dart';
-import 'package:classroom_manager/widgets/TasksWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../models/Task.dart';
+import '../services/TaskService.dart';
+import '../static/texts.dart';
+import 'login.dart';
 
 class TaskDetailPage extends StatefulWidget {
   late int task_id;
@@ -167,6 +167,7 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
               if (status) {
                 Navigator.of(context, rootNavigator: true).pop(context);
                 Navigator.of(context).pop();
+                
               } else {
                 Navigator.of(context, rootNavigator: true).pop(context);
                 const snackBar = SnackBar(

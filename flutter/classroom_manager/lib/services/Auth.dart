@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:classroom_manager/static/urls.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+
+import '../static/urls.dart';
 
 class Auth {
   final storage = FlutterSecureStorage();
@@ -22,8 +24,7 @@ class Auth {
       return false;
     } else {
       var headers = {'Content-Type': 'application/json'};
-      var request =
-          http.Request('POST', Uri.http(Urls.mainUrl, Urls.verifyToken));
+      var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.verifyToken));
       request.body = json.encode({"token": token});
       request.headers.addAll(headers);
 
@@ -44,8 +45,7 @@ class Auth {
       return false;
     } else {
       var headers = {'Content-Type': 'application/json'};
-      var request =
-          http.Request('POST', Uri.http(Urls.mainUrl, Urls.resfreshToken));
+      var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.resfreshToken));
       request.body = json.encode({"refresh": refresh});
       request.headers.addAll(headers);
 
@@ -74,9 +74,8 @@ class Auth {
       //token hala gecerli giris yapilabilir
       return true;
     } else {
-      var refresh_token_status =
-          await refreshToken(); //refresh token ile yeni token alinacak
-      if (refresh_token_status ) {
+      var refresh_token_status = await refreshToken(); //refresh token ile yeni token alinacak
+      if (refresh_token_status) {
         return true;
       } else {
         return false;

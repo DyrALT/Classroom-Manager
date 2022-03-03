@@ -1,9 +1,10 @@
-import 'package:classroom_manager/models/Student.dart';
-import 'package:classroom_manager/pages/login.dart';
-import 'package:classroom_manager/pages/studentDetailPage.dart';
-import 'package:classroom_manager/services/StudentService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../models/Student.dart';
+import '../pages/login.dart';
+import '../pages/studentDetailPage.dart';
+import '../services/StudentService.dart';
 
 class StudentsWidget extends StatefulWidget {
   const StudentsWidget({Key? key}) : super(key: key);
@@ -28,8 +29,7 @@ class _StudentsWidgetState extends State<StudentsWidget> {
     var gelenStudent = await _studentService.getStudents();
     if (gelenStudent == false) {
       WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) => Login()), (r) => false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Login()), (r) => false);
       });
     } else if (gelenStudent != null) {
       setState(() {
@@ -56,7 +56,9 @@ class _StudentsWidgetState extends State<StudentsWidget> {
                   title: Text(students?[index].username ?? 'null'),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => StudentDetailPage(student: students![index],),
+                      builder: (context) => StudentDetailPage(
+                        student: students![index],
+                      ),
                     ));
                   },
                 );

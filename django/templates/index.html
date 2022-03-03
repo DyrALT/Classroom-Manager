@@ -2,7 +2,26 @@
 {% block title%}Ana Sayfa{%endblock%} 
 {% block body %}
 
-<h2 style='margin-top:10px  '>Yapilan Gorevler:</h2>
+{% if tasks %}
+<h2 style='margin-top:10px'>Verilen Gorevler:</h2>
+<div class="row">
+{% for task in tasks %}
+  <div class="column">
+      <div class="card text-center">
+        <div class="card-header" id="card_header_info">{{task.created_date}}</div>
+          <div class="card-body">
+              <h5 class="card-title">{{task.title}}</h5>
+              <p class="card-text">{{task.content}}</p>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+              <a href="/task/{{task.id}}" class="btn btn-primary">Detay</a></div>
+          </div>
+      </div>
+  </div>
+  
+{% endfor %}
+{% else %}
+<h2 style='margin-top:10px'>Yapilan Gorevler:</h2>
 {% if finished %}
 <div class="row">
 {% for task in finished %}
@@ -47,4 +66,6 @@
 {% else %}
 <div class='card-title text-xl-center me-auto w-25 rounded-pill'>tamamlanmayan gorev yok</div>
 {% endif %}
+{% endif %}
+
 {% endblock body %}

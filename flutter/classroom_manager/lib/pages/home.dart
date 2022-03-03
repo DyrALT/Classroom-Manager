@@ -14,11 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   late TabController _tabController;
-  final _tabPages = [
-    const TasksWidget(),
-    const StudentsWidget(),
-    const SettingsWidget()
-  ];
+  final _tabPages = [const TasksWidget(), const StudentsWidget(), const SettingsWidget()];
   final _tabs = [
     const Tab(icon: Icon(Icons.content_paste_sharp)),
     const Tab(icon: Icon(Icons.group)),

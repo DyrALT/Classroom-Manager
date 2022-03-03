@@ -1,4 +1,5 @@
-abstract class LoginEvent{}
+abstract class LoginEvent {}
 
-class HomeWidgetEvent extends LoginEvent{}
-class LoginWidgetEvent extends LoginEvent{}
+class HomeWidgetEvent extends LoginEvent {}
+
+class LoginWidgetEvent extends LoginEvent {}
