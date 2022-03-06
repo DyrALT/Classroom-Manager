@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../services/auth.dart';
+import '../services/locator.dart';
 import 'login_page.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -11,6 +13,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final Auth _auth = locator<Auth>();
+
   final storage = const FlutterSecureStorage();
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
       children: [
         ElevatedButton.icon(
             onPressed: () async {
-              await storage.deleteAll();
+              _auth.logout();
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (context) => const Login(),

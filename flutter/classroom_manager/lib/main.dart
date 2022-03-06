@@ -1,8 +1,10 @@
-import 'package:classroom_manager/bloc/login_bloc/login_bloc.dart';
-import 'package:classroom_manager/bloc/login_bloc/login_events.dart';
+import 'package:classroom_manager/blocs/login_bloc/login_bloc.dart';
+import 'package:classroom_manager/blocs/login_bloc/login_events.dart';
+import 'package:classroom_manager/blocs/task_bloc/task_bloc.dart';
 import 'package:classroom_manager/services/auth.dart';
 import 'package:classroom_manager/services/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
@@ -16,8 +18,8 @@ void main() async {
 final LoginBloc loginBloc = locator.get<LoginBloc>();
 
 initialization(BuildContext context) async {
-  Auth _auth = Auth();
-  var login = await _auth.getLogin();
+  Auth _auth = locator<Auth>();
+  bool login = await _auth.getLogin();
   if (login) {
     loginBloc.loginEventSink.add(HomeWidgetEvent());
   } else {
@@ -38,12 +40,15 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(color: Colors.white),
         primarySwatch: Colors.cyan,
       ),
-      home: StreamBuilder(
-        initialData: loginBloc.widget,
-        stream: loginBloc.widget_,
-        builder: (context, snapshot) {
-          return (snapshot.data as Widget);
-        },
+      home: BlocProvider(
+        create: (context) => TaskBloc(),
+        child: StreamBuilder(
+          initialData: loginBloc.widget,
+          stream: loginBloc.widget_,
+          builder: (context, snapshot) {
+            return (snapshot.data as Widget);
+          },
+        ),
       ),
     );
   }

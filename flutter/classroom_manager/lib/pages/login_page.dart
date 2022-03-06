@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/auth.dart';
+import '../services/locator.dart';
 import '../static/texts.dart';
 import 'home_page.dart';
 
@@ -12,7 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final Auth _auth = Auth();
+  final Auth _auth = locator<Auth>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   @override
@@ -153,7 +154,7 @@ class _LoginState extends State<Login> {
   }
 
   void login() async {
-    var response = await _auth.loginWithUsernamePassword(_email.text, _password.text);
+    var response = await _auth.login(_email.text, _password.text);
     if (response ) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
