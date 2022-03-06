@@ -1,5 +1,6 @@
-import 'package:classroom_manager/bloc/login_bloc/login_bloc.dart';
 import 'package:get_it/get_it.dart';
+
+import '../bloc/login_bloc/login_bloc.dart';
 
 GetIt locator = GetIt.instance;
 

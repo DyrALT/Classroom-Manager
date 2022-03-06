@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../models/Task.dart';
-import '../pages/login.dart';
+import '../models/task.dart';
 
 class TasksWidget extends StatefulWidget {
   const TasksWidget({Key? key}) : super(key: key);
@@ -18,6 +17,6 @@ class _TasksWidgetState extends State<TasksWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(onRefresh: () => Future.delayed(Duration(seconds: 3)), child: SizedBox(height: MediaQuery.of(context).size.height, child: Text('datas')));
+    return RefreshIndicator(onRefresh: () => Future.delayed(const Duration(seconds: 3)), child: SizedBox(height: MediaQuery.of(context).size.height, child: const Text('datas')));
   }
 }

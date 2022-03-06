@@ -1,4 +1,4 @@
-import 'Student.dart';
+import 'student.dart';
 
 class Task {
   int? id;

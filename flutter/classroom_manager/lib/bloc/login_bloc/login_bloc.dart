@@ -2,8 +2,8 @@ import 'dart:async';
 
 import "package:flutter/material.dart";
 
-import '../../pages/home.dart';
-import '../../pages/login.dart';
+import '../../pages/home_page.dart';
+import '../../pages/login_page.dart';
 import 'login_events.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 

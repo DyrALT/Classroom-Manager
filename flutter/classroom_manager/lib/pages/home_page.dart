@@ -1,8 +1,9 @@
-import 'package:classroom_manager/widgets/StudentsWidget.dart';
-import 'package:classroom_manager/widgets/TasksWidget.dart';
-import 'package:classroom_manager/widgets/SettingsWidget.dart';
-import 'package:classroom_manager/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/appbar.dart';
+import 'settings_page.dart';
+import 'students_view_page.dart';
+import 'tasks_view_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   late TabController _tabController;
-  final _tabPages = [const TasksWidget(), const StudentsWidget(), const SettingsWidget()];
+  final _tabPages = [const TasksWidget(), const StudentsWidget(), const SettingsPage()];
   final _tabs = [
     const Tab(icon: Icon(Icons.content_paste_sharp)),
     const Tab(icon: Icon(Icons.group)),
