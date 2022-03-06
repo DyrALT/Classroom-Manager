@@ -84,10 +84,10 @@ class Auth {
   }
 
   verifyAuth() async {
-    var verify_token = await verifyToken();
-    if (verify_token == false) {
-      var refresh_token = await refreshToken();
-      if (refresh_token == false) {
+    var currentToken = await verifyToken();
+    if (currentToken == false) {
+      var currentRefreshToken = await refreshToken();
+      if (currentRefreshToken == false) {
         return false;
       } else {
         return true;
@@ -109,7 +109,7 @@ class Auth {
       var obj = json.decode(await response.stream.bytesToString());
       await storage.write(key: 'access', value: obj['access']);
       await storage.write(key: 'refresh', value: obj['refresh']);
-      return obj;
+      return true;
     } else {
       return false;
     }

@@ -154,23 +154,19 @@ class _LoginState extends State<Login> {
 
   void login() async {
     var response = await _auth.loginWithUsernamePassword(_email.text, _password.text);
-    if (response == null) {
+    if (response ) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+          (route) => false);
+    } else {
       const snackBar = SnackBar(
         duration: Duration(seconds: 3),
         content: Text(Texts.login_error),
         backgroundColor: (Colors.black54),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-          (route) => false);
     }
-    // print(response['access']);
-    // if (response != null) {
-
-    // }
   }
 }
