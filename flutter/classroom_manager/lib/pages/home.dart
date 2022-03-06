@@ -1,8 +1,7 @@
-import 'package:classroom_manager/pages/addStudentPage.dart';
-import 'package:classroom_manager/pages/addTaskPage.dart';
 import 'package:classroom_manager/widgets/StudentsWidget.dart';
 import 'package:classroom_manager/widgets/TasksWidget.dart';
 import 'package:classroom_manager/widgets/SettingsWidget.dart';
+import 'package:classroom_manager/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -46,25 +45,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const Text(
-          'Classrom Manager',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Colors.cyan.shade800,
-            Colors.cyan.shade500,
-            Colors.cyan.shade400,
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        ),
-      ),
+      appBar: MyAppBar(title: 'Classroom Manager', appBar: AppBar(), widgets: const []),
       body: TabBarView(
         children: _tabPages,
         controller: _tabController,
@@ -84,11 +65,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget? floatButtons() {
     return _tabController.index == 0
         ? FloatingActionButton(
-            shape: StadiumBorder(),
+            shape: const StadiumBorder(),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AddTaskPage(),
-              ));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (context) => const null,
+              // ));
             },
             foregroundColor: Colors.white,
             child: const Icon(
@@ -96,11 +77,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ))
         : _tabController.index == 1
             ? FloatingActionButton(
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AddStudentPage(),
-                  ));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => const AddStudentPage(),
+                  // ));
                 },
                 foregroundColor: Colors.white,
                 child: const Icon(

@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
                                 ),
                                 child: TextField(
                                   controller: _email,
-                                  decoration: InputDecoration(hintText: "Email", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
+                                  decoration: const InputDecoration(hintText: "Email", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
                                 ),
                               ),
                               Container(
@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
                                 child: TextField(
                                   controller: _password,
                                   decoration:
-                                      InputDecoration(hintText: "Password", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
+                                      const InputDecoration(hintText: "Password", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
                                 ),
                               ),
                             ],
@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                             child: Container(
                               height: 50,
                               margin: const EdgeInsets.symmetric(horizontal: 50),
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color.fromARGB(255, 84, 163, 187)),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: const Color.fromARGB(255, 84, 163, 187)),
                               child: const Center(
                                 child: Text(
                                   "Login",
@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => Home(),
+            builder: (context) => const Home(),
           ),
           (route) => false);
     }

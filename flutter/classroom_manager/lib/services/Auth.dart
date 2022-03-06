@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '../static/urls.dart';
 
 class Auth {
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<String?> getToken() async {
     String? token = await storage.read(key: 'access');
@@ -24,7 +24,7 @@ class Auth {
       return false;
     } else {
       var headers = {'Content-Type': 'application/json'};
-      var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.verifyToken));
+      var request = http.Request('POST', Uri.parse(Urls.mainUrl+ Urls.verifyToken));
       request.body = json.encode({"token": token});
       request.headers.addAll(headers);
 
@@ -45,7 +45,7 @@ class Auth {
       return false;
     } else {
       var headers = {'Content-Type': 'application/json'};
-      var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.resfreshToken));
+      var request = http.Request('POST', Uri.parse(Urls.mainUrl+ Urls.resfreshToken));
       request.body = json.encode({"refresh": refresh});
       request.headers.addAll(headers);
 
@@ -69,13 +69,13 @@ class Auth {
   acces : $access
   refresh : $refresh
 ''');
-    var token_status = await verifyToken();
-    if (token_status) {
+    var tokenStatus = await verifyToken();
+    if (tokenStatus) {
       //token hala gecerli giris yapilabilir
       return true;
     } else {
-      var refresh_token_status = await refreshToken(); //refresh token ile yeni token alinacak
-      if (refresh_token_status) {
+      var refreshTokenStatus = await refreshToken(); //refresh token ile yeni token alinacak
+      if (refreshTokenStatus) {
         return true;
       } else {
         return false;
@@ -99,7 +99,7 @@ class Auth {
 
   loginWithUsernamePassword(String username, String password) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('POST', Uri.http(Urls.mainUrl, Urls.tokenUrl));
+    var request = http.Request('POST', Uri.parse(Urls.mainUrl+ Urls.tokenUrl));
     request.body = json.encode({"username": username, "password": password});
     request.headers.addAll(headers);
 

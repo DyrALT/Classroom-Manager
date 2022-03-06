@@ -11,7 +11,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [Text('settings')],
+      children: [const Text('settings')],
     );
   }
 }

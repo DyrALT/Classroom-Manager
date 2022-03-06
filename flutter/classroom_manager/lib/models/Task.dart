@@ -24,28 +24,28 @@ class Task {
     if (json['finished'] != null) {
       finished = <Student>[];
       json['finished'].forEach((v) {
-        finished!.add(new Student.fromJson(v));
+        finished!.add(Student.fromJson(v));
       });
     }
     if (json['unfinished'] != null) {
       unfinished = <Student>[];
       json['unfinished'].forEach((v) {
-        unfinished!.add(new Student.fromJson(v));
+        unfinished!.add(Student.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['content'] = this.content;
-    data['created_date'] = this.createdDate;
-    if (this.finished != null) {
-      data['finished'] = this.finished!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['content'] = content;
+    data['created_date'] = createdDate;
+    if (finished != null) {
+      data['finished'] = finished!.map((v) => v.toJson()).toList();
     }
-    if (this.unfinished != null) {
-      data['unfinished'] = this.unfinished!.map((v) => v.toJson()).toList();
+    if (unfinished != null) {
+      data['unfinished'] = unfinished!.map((v) => v.toJson()).toList();
     }
     return data;
   }

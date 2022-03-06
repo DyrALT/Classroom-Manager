@@ -12,7 +12,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
   Widget build(BuildContext context) {
     return BottomAppBar(
       child: Row(
-        children: [],
+        children: const [],
       ),
     );
   }

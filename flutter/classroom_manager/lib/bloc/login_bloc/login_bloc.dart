@@ -8,7 +8,7 @@ import 'login_events.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginBloc {
-  Widget widget = Login();
+  Widget widget = const Login();
   final _loginStateStreamController = StreamController.broadcast();
   Stream get widget_ => _loginStateStreamController.stream;
   StreamSink get _loginStateSink => _loginStateStreamController.sink;
@@ -22,10 +22,10 @@ class LoginBloc {
 
   void _mapEventToState(LoginEvent event) async {
     if (event is HomeWidgetEvent) {
-      widget = Home();
+      widget = const Home();
     }
     if (event is LoginWidgetEvent) {
-      widget = Login();
+      widget = const Login();
     }
     _loginStateSink.add(widget);
   }
