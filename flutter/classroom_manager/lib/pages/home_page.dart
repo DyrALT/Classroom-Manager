@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/task_bloc/task_bloc.dart';
 import '../widgets/appbar.dart';
 import 'settings_page.dart';
 import 'students_view_page.dart';
@@ -14,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   late TabController _tabController;
-  final _tabPages = [const TaskWidget(), const StudentsWidget(), const SettingsPage()];
+  final _tabPages = [const TaskListView(), const StudentsListView(), const SettingsPage()];
   final _tabs = [
     const Tab(icon: Icon(Icons.content_paste_sharp)),
     const Tab(icon: Icon(Icons.group)),
@@ -67,11 +69,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return _tabController.index == 0
         ? FloatingActionButton(
             shape: const StadiumBorder(),
-            onPressed: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => const null,
-              // ));
-            },
+            onPressed: () {},
             foregroundColor: Colors.white,
             child: const Icon(
               Icons.add,

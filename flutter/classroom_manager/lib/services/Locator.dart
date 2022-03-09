@@ -1,3 +1,4 @@
+import 'package:classroom_manager/services/student_service.dart';
 import 'package:classroom_manager/services/task_service.dart';
 import 'package:classroom_manager/services/auth.dart';
 import 'package:get_it/get_it.dart';
@@ -10,4 +11,5 @@ Future<void> setupLocator()async {
   locator.registerLazySingleton(() => LoginBloc());
   locator.registerLazySingleton(() => Auth());
   locator.registerLazySingleton(() => TaskService());
+  locator.registerLazySingleton(() => StudentService());
 }

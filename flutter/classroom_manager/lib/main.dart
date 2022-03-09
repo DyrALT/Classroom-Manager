@@ -7,12 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import 'blocs/student_bloc/student_bloc.dart';
+
 void main() async {
   await setupLocator();
 
   WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.removeAfter(initialization);
-  runApp(const MyApp());
+
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => TaskBloc(),
+      ),
+      BlocProvider(
+        create: (context) => StudentBloc(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 final LoginBloc loginBloc = locator.get<LoginBloc>();
@@ -40,15 +53,12 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(color: Colors.white),
         primarySwatch: Colors.cyan,
       ),
-      home: BlocProvider(
-        create: (context) => TaskBloc(),
-        child: StreamBuilder(
-          initialData: loginBloc.widget,
-          stream: loginBloc.widget_,
-          builder: (context, snapshot) {
-            return (snapshot.data as Widget);
-          },
-        ),
+      home: StreamBuilder(
+        initialData: loginBloc.widget,
+        stream: loginBloc.widget_,
+        builder: (context, snapshot) {
+          return (snapshot.data as Widget);
+        },
       ),
     );
   }

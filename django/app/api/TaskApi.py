@@ -53,9 +53,9 @@ class ListTasksView(APIView):
             })
         if query is not None:
             serializer = TaskSerializer(query, many=True)
-            return Response(data={
-                'tasks': serializer.data
-            })
+            return Response(data=
+                 serializer.data
+            )
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
                 'status': 'error',

@@ -20,6 +20,7 @@ class Auth {
 
   logout()async{
     await _storage.deleteAll();
+    
   }
 
   verifyToken() async {

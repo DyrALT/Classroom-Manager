@@ -18,4 +18,4 @@ class StudentListLoadedState extends StudentState {
   List<Object> get props => [students];
 }
 
-class StudentListError extends StudentState {}
+class StudentListErrorState extends StudentState {}
