@@ -15,15 +15,17 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitial()) {
     on<FetchTaskListEvent>(_fetchTaskList);
     on<RefreshTaskListEvent>(_refreshTaskList);
+    on<FetchTaskDetailEvent>(_fetchTaskDetail);
+    on<RefreshTaskDetailEvent>(_refreshTaskDetail);
   }
 
   Future<FutureOr<void>> _fetchTaskList(FetchTaskListEvent event, Emitter<TaskState> emit) async {
-    emit(TaskListLoadingState());
+    emit(TaskLoadingState());
     try {
       List<Task?> tasks = await _taskService.getTaskList();
       emit(TaskListLoadedState(tasks: tasks));
     } catch (_) {
-      emit(TaskListErrorState());
+      emit(TaskErrorState());
     }
   }
 
@@ -32,7 +34,26 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       List<Task?> tasks = await _taskService.getTaskList();
       emit(TaskListLoadedState(tasks: tasks));
     } catch (_) {
-      emit(state);
+      emit(TaskErrorState());
+    }
+  }
+
+  Future<FutureOr<void>> _fetchTaskDetail(FetchTaskDetailEvent event, Emitter<TaskState> emit) async {
+    emit(TaskLoadingState());
+    try {
+      Task task = await _taskService.taskDetail(event.id);
+      emit(TaskDetailLoadedState(task: task));
+    } catch (_) {
+      emit(TaskErrorState());
+    }
+  }
+
+  Future<FutureOr<void>> _refreshTaskDetail(RefreshTaskDetailEvent event, Emitter<TaskState> emit) async {
+    try {
+      Task task = await _taskService.taskDetail(event.id);
+      emit(TaskDetailLoadedState(task: task));
+    } catch (_) {
+      emit(TaskErrorState());
     }
   }
 }

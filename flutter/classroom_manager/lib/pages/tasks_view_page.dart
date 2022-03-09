@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:classroom_manager/pages/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -26,7 +27,7 @@ class TaskListView extends StatelessWidget {
       bloc: _taskBloc,
       buildWhen: (previous, current) => previous != current && current is TaskListLoadedState,
       builder: (context, state) {
-        if (state is TaskListLoadingState) {
+        if (state is TaskLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -43,10 +44,10 @@ class TaskListView extends StatelessWidget {
                   child: SizedBox(
                       child: SizedBox(
                     height: MediaQuery.of(context).size.height,
-                    child: listview(state),
+                    child: listview(state, _taskBloc),
                   )))
               : const InfoMessageWidget(message: 'Hic Task Eklenmedi');
-        } else if (state is TaskListErrorState) {
+        } else if (state is TaskErrorState) {
           _refreshCompleter.complete();
           _refreshCompleter = Completer();
           return const ErrorMessageWidget(
@@ -59,7 +60,7 @@ class TaskListView extends StatelessWidget {
     );
   }
 
-  ListView listview(TaskListLoadedState state) {
+  ListView listview(TaskListLoadedState state, TaskBloc _taskBloc) {
     return ListView.builder(
         itemCount: state.tasks.length,
         scrollDirection: Axis.vertical,
@@ -70,7 +71,14 @@ class TaskListView extends StatelessWidget {
             subtitle: state.tasks[index]!.content!,
             date: state.tasks[index]!.createdDate,
             onTap: () {
-              print('basildi');
+              _taskBloc.add(FetchTaskDetailEvent(id: state.tasks[index]!.id!));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsPage(
+                      title: state.tasks[index]!.title!,
+                    ),
+                  ));
             },
           );
         });

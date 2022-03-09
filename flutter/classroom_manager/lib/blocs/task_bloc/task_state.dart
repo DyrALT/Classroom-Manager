@@ -9,7 +9,7 @@ abstract class TaskState extends Equatable {
 
 class TaskInitial extends TaskState {}
 
-class TaskListLoadingState extends TaskState {}
+class TaskLoadingState extends TaskState {}
 
 class TaskListLoadedState extends TaskState {
   final List<Task?> tasks;
@@ -19,4 +19,12 @@ class TaskListLoadedState extends TaskState {
   List<Object> get props => [tasks];
 }
 
-class TaskListErrorState extends TaskState {}
+class TaskErrorState extends TaskState {}
+
+class TaskDetailLoadedState extends TaskState {
+  final Task task;
+  const TaskDetailLoadedState({required this.task});
+
+    @override
+  List<Object> get props => [task];
+}

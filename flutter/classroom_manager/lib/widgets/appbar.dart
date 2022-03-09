@@ -15,6 +15,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
+      iconTheme: const IconThemeData(
+        color: Colors.white, //change your color here
+      ),
       centerTitle: true,
       actions: widgets,
       title: Text(

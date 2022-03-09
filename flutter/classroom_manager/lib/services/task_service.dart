@@ -29,4 +29,22 @@ class TaskService {
       // return tasks;
     }
   }
+
+  taskDetail(int id) async {
+    var token = await _auth.getToken();
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(Urls.mainUrl + Urls.detailTask));
+    request.body = json.encode({"id": id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      var obj = json.decode(await response.stream.bytesToString());
+      return Task.fromJson(obj);
+    } else {
+      print(response.reasonPhrase);
+      return null;
+    }
+  }
 }

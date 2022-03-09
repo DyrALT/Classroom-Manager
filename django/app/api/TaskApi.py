@@ -53,9 +53,8 @@ class ListTasksView(APIView):
             })
         if query is not None:
             serializer = TaskSerializer(query, many=True)
-            return Response(data=
-                 serializer.data
-            )
+            return Response(data=serializer.data
+                            )
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
                 'status': 'error',
@@ -85,22 +84,17 @@ class DetailTaskView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        query = Task.objects.filter(id=request.data['id'])
         try:
-            check = query[0]
-        except :
+            query = Task.objects.get(id=request.data['id'])
+        except:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
                 'data': None,
             })
-            
-        serializer = TaskSerializer(query,many=True)
-        
+
+        serializer = TaskSerializer(query)
+
         if serializer is not None:
-            return Response(data=
-
-                serializer.data[0],
-
-            )
+            return Response(data=serializer.data,)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={
                 'status': 'error',
