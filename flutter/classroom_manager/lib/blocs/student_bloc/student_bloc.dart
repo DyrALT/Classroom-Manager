@@ -16,6 +16,7 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     on<FetchStudentListEvent>(_fetchStudentListEvent);
     on<RefreshStudentListEvent>(_refreshStudentListEvent);
     on<StudentUpdateEvent>(_studentUpdateEvent);
+    on<StudentDeleteEvent>(_deleteStudentEvent);
   }
 
   Future<FutureOr<void>> _fetchStudentListEvent(FetchStudentListEvent event, Emitter<StudentState> emit) async {
@@ -41,8 +42,21 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     emit(StudentLoadingState());
     try {
       bool updateStudentStatus = await _studentService.updateStudent(event.student.id!, event.firstName, event.lastName, event.password);
-      print('deger= $updateStudentStatus');
       if (updateStudentStatus) {
+        List<Student?> students = await _studentService.getStudentList();
+        emit(StudentListLoadedState(students: students));
+      } else {
+        emit(StudentErrorState());
+      }
+    } catch (_) {
+      emit(StudentErrorState());
+    }
+  }
+
+  Future<FutureOr<void>> _deleteStudentEvent(StudentDeleteEvent event, Emitter<StudentState> emit) async {
+    try {
+      bool deleteStudentStatus = await _studentService.deleteStudent(event.student.id!);
+      if (deleteStudentStatus) {
         List<Student?> students = await _studentService.getStudentList();
         emit(StudentListLoadedState(students: students));
       } else {

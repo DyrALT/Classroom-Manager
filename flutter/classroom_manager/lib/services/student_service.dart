@@ -10,6 +10,23 @@ import 'locator.dart';
 class StudentService {
   final _auth = locator<Auth>();
 
+  deleteStudent(int id) async {
+    var token = await _auth.getToken();
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(Urls.mainUrl + Urls.deleteStudent));
+    request.body = json.encode({"studentId": id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
   updateStudent(int id, String firstName, String lastName, String password) async {
     var token = await _auth.getToken();
 
@@ -21,9 +38,9 @@ class StudentService {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
       return true;
     } else {
+      // ignore: avoid_print
       print(response.reasonPhrase);
       return false;
     }
@@ -45,6 +62,7 @@ class StudentService {
       students.addAll((obj as List).map((e) => Student.fromJson(e)).toList());
       return students;
     } else {
+      // ignore: avoid_print
       print(response.reasonPhrase);
     }
   }

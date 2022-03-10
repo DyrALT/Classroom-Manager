@@ -21,3 +21,11 @@ class StudentUpdateEvent extends StudentEvent {
   @override
   List<Object> get props => [student];
 }
+
+class StudentDeleteEvent extends StudentEvent {
+  final Student student;
+  const StudentDeleteEvent({required this.student});
+
+    @override
+  List<Object> get props => [student];
+}

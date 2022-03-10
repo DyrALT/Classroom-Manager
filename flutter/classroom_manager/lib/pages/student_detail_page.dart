@@ -28,7 +28,13 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
     final _studentBloc = BlocProvider.of<StudentBloc>(context);
     // _studentBloc.add(StudentUpdateEvent(student: widget.student, password: _password));
     return Scaffold(
-      appBar: MyAppBar(title: widget.student.username!, appBar: AppBar(), widgets: const []),
+      appBar: MyAppBar(title: widget.student.username!, appBar: AppBar(), widgets: [
+        IconButton(
+            onPressed: () {
+              stuentDelete(_studentBloc);
+            },
+            icon: const Icon(Icons.delete))
+      ]),
       floatingActionButton: floatingActionButton(_studentBloc),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
@@ -159,6 +165,26 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                   labelText: Texts.student_form_lastname_title,
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: const BorderSide(width: 1, color: Colors.purple))),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  stuentDelete(StudentBloc _studentBloc) {
+    return showDialog(
+      context: context,
+      builder: (builder) => AlertDialog(
+        title: const Text("Emin Misiniz?"),
+        content: const Text('Bu Ogrenciyi silmek istediginize emin misiniz?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              _studentBloc.add(StudentDeleteEvent(student: widget.student));
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            child: Text("EVET"),
           ),
         ],
       ),

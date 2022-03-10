@@ -5,7 +5,7 @@ def deleteStudentService(request):
     data = request.data
     try:
         teacher = request.user.teacher.first()
-        student = Student.objects.get(id=data['student_id'])
+        student = Student.objects.get(id=data['studentId'])
         student_user = User.objects.get(id=student.user.id)
         student.delete()
         student_user.delete()
