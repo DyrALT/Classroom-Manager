@@ -1,3 +1,4 @@
+import 'package:classroom_manager/pages/create_student_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -78,9 +79,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ? FloatingActionButton(
                 shape: const StadiumBorder(),
                 onPressed: () {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => const AddStudentPage(),
-                  // ));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CreateStudentPage(),
+                  ));
                 },
                 foregroundColor: Colors.white,
                 child: const Icon(

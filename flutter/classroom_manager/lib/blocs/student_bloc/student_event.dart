@@ -26,6 +26,17 @@ class StudentDeleteEvent extends StudentEvent {
   final Student student;
   const StudentDeleteEvent({required this.student});
 
-    @override
+  @override
   List<Object> get props => [student];
 }
+
+class StudentCreateEvent extends StudentEvent {
+  final String firstName;
+  final String lastName;
+  final String password;
+  const StudentCreateEvent({required this.firstName, required this.lastName,required this.password});
+
+    @override
+  List<Object> get props => [firstName,lastName,password];
+}
+

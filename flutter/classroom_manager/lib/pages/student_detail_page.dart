@@ -26,7 +26,6 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final _studentBloc = BlocProvider.of<StudentBloc>(context);
-    // _studentBloc.add(StudentUpdateEvent(student: widget.student, password: _password));
     return Scaffold(
       appBar: MyAppBar(title: widget.student.username!, appBar: AppBar(), widgets: [
         IconButton(
@@ -184,7 +183,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: Text("EVET"),
+            child: const Text("EVET"),
           ),
         ],
       ),
