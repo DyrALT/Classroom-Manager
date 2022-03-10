@@ -12,4 +12,5 @@ class Texts {
   static const student_update_error = 'Ogrenci Guncellenemedi';
   static const task_delete_error = 'Task Silinemedi';
   static const student_delete_error = 'Ogrenci Silinemedi';
+  static const student_upgrade = 'Ogrenci Guncelle';
 }

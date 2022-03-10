@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:classroom_manager/pages/student_detail_page.dart';
 import 'package:classroom_manager/widgets/info.dart';
 import 'package:classroom_manager/widgets/list_item.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class StudentsListView extends StatelessWidget {
       bloc: _studentBloc,
       buildWhen: (previous, current) => previous != current && current is StudentListLoadedState,
       builder: (context, state) {
-        if (state is StudentListLoadingState) {
+        if (state is StudentLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -45,7 +46,7 @@ class StudentsListView extends StatelessWidget {
                   ),
                 )
               : const InfoMessageWidget(message: 'Hic Ogrenci Eklenmedi');
-        } else if (state is StudentListErrorState) {
+        } else if (state is StudentErrorState) {
           _refreshCompleter.complete();
           _refreshCompleter = Completer();
           return const ErrorMessageWidget(
@@ -64,7 +65,16 @@ class StudentsListView extends StatelessWidget {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return ListItem(title: state.students[index]!.username!);
+          return ListItem(
+            title: state.students[index]!.username!,
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudentDetailsPage(student: state.students[index]!),
+                  ));
+            },
+          );
         });
   }
 }

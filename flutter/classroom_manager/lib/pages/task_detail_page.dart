@@ -8,15 +8,15 @@ import '../models/task.dart';
 import '../widgets/appbar.dart';
 import '../widgets/error.dart';
 
-class DetailsPage extends StatefulWidget {
+class TaskDetailsPage extends StatefulWidget {
   final String title;
-  const DetailsPage({Key? key, required this.title}) : super(key: key);
+  const TaskDetailsPage({Key? key, required this.title}) : super(key: key);
 
   @override
-  State<DetailsPage> createState() => _DetailsPageState();
+  State<TaskDetailsPage> createState() => _TaskDetailsPageState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _TaskDetailsPageState extends State<TaskDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final _taskBloc = BlocProvider.of<TaskBloc>(context);

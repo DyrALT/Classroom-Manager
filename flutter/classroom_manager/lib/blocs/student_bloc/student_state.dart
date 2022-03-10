@@ -9,13 +9,20 @@ abstract class StudentState extends Equatable {
 
 class StudentInitial extends StudentState {}
 
-class StudentListLoadingState extends StudentState {}
+class StudentLoadingState extends StudentState {}
 
 class StudentListLoadedState extends StudentState {
   final List<Student?> students;
   const StudentListLoadedState({required this.students});
-    @override
+  @override
   List<Object> get props => [students];
 }
 
-class StudentListErrorState extends StudentState {}
+class StudentDetailState extends StudentState {
+  final Student student;
+  const StudentDetailState({required this.student});
+  @override
+  List<Object> get props => [student];
+}
+
+class StudentErrorState extends StudentState {}

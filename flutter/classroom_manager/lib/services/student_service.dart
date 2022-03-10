@@ -10,6 +10,25 @@ import 'locator.dart';
 class StudentService {
   final _auth = locator<Auth>();
 
+  updateStudent(int id, String firstName, String lastName, String password) async {
+    var token = await _auth.getToken();
+
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(Urls.mainUrl + Urls.updateStudent));
+    request.body = json.encode({"studentId": id, "firstName": firstName, "lastName": lastName, "password": password});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
   getStudentList() async {
     var token = await _auth.getToken();
 

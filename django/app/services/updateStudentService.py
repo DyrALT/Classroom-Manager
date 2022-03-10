@@ -5,7 +5,8 @@ from ..models.Student import Student
 def updateStudentService(request):
     data = request.data
     try:
-        student = Student.objects.get(id=data['student_id'])
+        teacher = request.user.teacher.first()
+        student = Student.objects.get(id=data['studentId'])
         if data['password'].replace(" ", "") is not '':
             student.user.set_password(data['password'])
             student.user.save()

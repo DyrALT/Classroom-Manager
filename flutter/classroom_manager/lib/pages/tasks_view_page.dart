@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:classroom_manager/pages/details_page.dart';
+import 'package:classroom_manager/pages/task_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -75,7 +75,7 @@ class TaskListView extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailsPage(
+                    builder: (context) => TaskDetailsPage(
                       title: state.tasks[index]!.title!,
                     ),
                   ));

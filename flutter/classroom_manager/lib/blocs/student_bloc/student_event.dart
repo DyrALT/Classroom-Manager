@@ -7,6 +7,17 @@ abstract class StudentEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchStudentListEvent extends StudentEvent{}
+class FetchStudentListEvent extends StudentEvent {}
 
 class RefreshStudentListEvent extends StudentEvent {}
+
+class StudentUpdateEvent extends StudentEvent {
+  final Student student;
+  final String password;
+  final String firstName;
+  final String lastName;
+  const StudentUpdateEvent({required this.firstName, required this.lastName, required this.student, required this.password});
+
+  @override
+  List<Object> get props => [student];
+}
