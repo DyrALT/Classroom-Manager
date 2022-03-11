@@ -125,6 +125,7 @@ class _LoginState extends State<Login> {
         border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
       ),
       child: TextField(
+        obscureText: true,
         controller: _password,
         decoration: const InputDecoration(hintText: "Password", hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
       ),

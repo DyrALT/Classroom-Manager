@@ -88,14 +88,14 @@ class _CreateStudentPageState extends State<CreateStudentPage> {
         keyboardType: TextInputType.text,
         obscureText: true,
         validator: (value) {
-          if (value!.isNotEmpty) {
-            if (value.replaceAll(' ', '') == '') {
-              return Texts.required_to_be_filled;
+          if (value!.isEmpty) {
+            return Texts.required_to_be_filled;
+          } else {
+            if (value.length < 6 && value.isNotEmpty) {
+              return Texts.required_to_six_character;
             } else {
               return null;
             }
-          } else {
-            return null;
           }
         },
         decoration: InputDecoration(
