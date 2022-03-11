@@ -23,8 +23,42 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
     Completer<void> _refreshCompleter = Completer<void>();
 
     return Scaffold(
-      appBar: MyAppBar(title: widget.title, appBar: AppBar(), widgets: const []),
+      appBar: MyAppBar(title: widget.title, appBar: AppBar(), widgets: [
+        BlocBuilder<TaskBloc, TaskState>(
+          bloc: _taskBloc,
+          builder: (context, state) {
+            if (state is TaskDetailLoadedState) {
+              return IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (builder) => AlertDialog(
+                        title: const Text("Emin Misiniz?"),
+                        content: const Text('Bu gorevi silmek istediginize emin misiniz?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () async {
+                      _taskBloc.add(DeleteTaskEvent(id: state.task.id!));
+
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: const Text("EVET"),
+                          ),
+                        ],
+                      ),
+                    );
+
+                  },
+                  icon: const Icon(Icons.delete));
+            } else {
+              return const SizedBox();
+            }
+          },
+        )
+      ]),
       body: BlocBuilder<TaskBloc, TaskState>(
+        bloc: _taskBloc,
         builder: (context, state) {
           if (state is TaskLoadingState) {
             return const Center(

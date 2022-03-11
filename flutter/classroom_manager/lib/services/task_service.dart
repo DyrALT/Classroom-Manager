@@ -10,6 +10,24 @@ import 'locator.dart';
 class TaskService {
   final _auth = locator<Auth>();
 
+  deleteTask(int id) async {
+    var token = await _auth.getToken();
+
+    var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(Urls.mainUrl + Urls.deleteTask));
+    request.body = json.encode({"task_id": id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
   createTask(String title, String content) async {
     var token = await _auth.getToken();
     var headers = {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'};

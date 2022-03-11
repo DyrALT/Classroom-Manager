@@ -32,7 +32,14 @@ class CreateTaskEvent extends TaskEvent {
   final String content;
   const CreateTaskEvent({required this.title, required this.content});
 
+  @override
+  List<Object> get props => [title, content];
+}
+
+class DeleteTaskEvent extends TaskEvent {
+  final int id;
+  const DeleteTaskEvent({required this.id});
 
   @override
-  List<Object> get props => [title,content];
+  List<Object> get props => [id];
 }

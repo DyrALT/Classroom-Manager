@@ -18,6 +18,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<FetchTaskDetailEvent>(_fetchTaskDetail);
     on<RefreshTaskDetailEvent>(_refreshTaskDetail);
     on<CreateTaskEvent>(_createTaskEvent);
+    on<DeleteTaskEvent>(_deleteTaskEvent);
   }
 
   Future<FutureOr<void>> _fetchTaskList(FetchTaskListEvent event, Emitter<TaskState> emit) async {
@@ -61,6 +62,20 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Future<FutureOr<void>> _createTaskEvent(CreateTaskEvent event, Emitter<TaskState> emit) async {
     try {
       bool createTaskStatus = await _taskService.createTask(event.title, event.content);
+      if (createTaskStatus) {
+        List<Task?> tasks = await _taskService.getTaskList();
+        emit(TaskListLoadedState(tasks: tasks));
+      } else {
+        emit(TaskErrorState());
+      }
+    } catch (_) {
+      emit(TaskErrorState());
+    }
+  }
+
+  Future<FutureOr<void>> _deleteTaskEvent(DeleteTaskEvent event, Emitter<TaskState> emit) async {
+    try {
+      bool createTaskStatus = await _taskService.deleteTask(event.id);
       if (createTaskStatus) {
         List<Task?> tasks = await _taskService.getTaskList();
         emit(TaskListLoadedState(tasks: tasks));
