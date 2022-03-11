@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/task_bloc/task_bloc.dart';
 import '../widgets/appbar.dart';
+import 'create_task_page.dart';
 import 'settings_page.dart';
 import 'students_view_page.dart';
 import 'tasks_view_page.dart';
@@ -70,7 +71,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return _tabController.index == 0
         ? FloatingActionButton(
             shape: const StadiumBorder(),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const CreateTaskPage(),
+              ));
+            },
             foregroundColor: Colors.white,
             child: const Icon(
               Icons.add,

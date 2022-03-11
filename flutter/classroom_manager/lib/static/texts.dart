@@ -14,4 +14,5 @@ class Texts {
   static const student_delete_error = 'Ogrenci Silinemedi';
   static const student_upgrade = 'Ogrenci Guncelle';
   static const student_create = 'Ogrenci Ekle';
+  static const task_create = 'Task Ekle';
 }

@@ -89,11 +89,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           const SizedBox(height: 20),
           Column(
             children: <Widget>[
-              for (var item in task.finished!)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [Text(item.username!, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 20)), const SizedBox()],
-                ),
+              for (var item in task.finished!) Text(item.username!, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
             ],
           ),
           const SizedBox(height: 30),
@@ -107,15 +103,12 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           Column(
             children: <Widget>[
               for (var item in task.unfinished!)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      item.username!,
-                      style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
-                    ),
-                    const SizedBox()
-                  ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 40, 10),
+                  child: Text(
+                    item.username!,
+                    style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                  ),
                 )
             ],
           ),

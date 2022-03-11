@@ -17,7 +17,6 @@ class FetchTaskDetailEvent extends TaskEvent {
 
   @override
   List<Object> get props => [id];
-
 }
 
 class RefreshTaskDetailEvent extends TaskEvent {
@@ -26,5 +25,14 @@ class RefreshTaskDetailEvent extends TaskEvent {
 
   @override
   List<Object> get props => [id];
+}
 
+class CreateTaskEvent extends TaskEvent {
+  final String title;
+  final String content;
+  const CreateTaskEvent({required this.title, required this.content});
+
+
+  @override
+  List<Object> get props => [title,content];
 }
